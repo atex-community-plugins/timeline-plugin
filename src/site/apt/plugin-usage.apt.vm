@@ -1,0 +1,65 @@
+Developer guide
+
+* Wiring example
+
+  To add wiring in your project, first add mappings from your relevant model types (e.g. article) to a <<<composer>>> by adding a
+  component in the plugin's variant config. The following example is in .content format and assumes that your article type is
+  <<<com.atex.standard.article.ArticleBean>>> and your composer content ID (defined further down) is <<<com.atex.gong.wiring.timeline.timelinenewscomposer>>>:
+
++------------------------------------------------------------------+
+id:com.atex.plugins.timeline.timelinenews.variantconfig
+major:3
+inputtemplate:com.polopoly.data.Variant.config
+component:composer:com.atex.standard.article.ArticleBean:com.atex.gong.wiring.timeline.timelinenewscomposer
++------------------------------------------------------------------+
+
+  The article type mentioned above is either the external input template id of your article or, if the article policy implements LegacyContentAdapter,
+  the Java bean type produced by that mapper.
+
+  You then need to define the composer content. This example specifies a Java ContentComposer implementation called
+  <<<com.atex.gong.wiring.timeline.ArticleToTimelineNewsContentComposer>>>:
+
++------------------------------------------------------------------+
+id:com.atex.gong.wiring.timeline.timelinenewscomposer
+major:3
+inputtemplate:p.model.Pojo
+component:model:modelType:com.atex.onecms.content.mapping.MappingConfigBean
+component:model:pojo:{'_type'\:'com.atex.onecms.content.mapping.MappingConfigBean', 'mapperClass'\:'com.atex.gong.wiring.timeline.ArticleToTimelineNewsContentComposer'}
++------------------------------------------------------------------+
+
+  Finally, the Java class has to be written. This is a simple class implementing ContentComposer that takes the
+  <<<com.atex.standard.article.ArticleBean>>> provided by the project article and produces the
+  <<<com.atex.plugins.timeline.TimelineNewsBean>>> bean expected by the timeline plugin:
+
++------------------------------------------------------------------+
+public class ArticleToTimelineNewsContentComposer implements
+        ContentComposer<ArticleBean, TimelineNewsBean, Object>
+{
+
+    @Override
+    public ContentResult<TimelineNewsBean> compose(final ContentResult<ArticleBean> source, final String variant,
+                                                       final Request request, final Context<Object> context) {
+        final ArticleBean article = source.getContent().getContentData();
+        final TimelineNewsBean bean = new TimelineNewsBean();
+        if (source.getContent().getId() != null) {
+            bean.setContentId(IdUtil.toPolicyContentId(source.getContent().getId().getContentId()));
+        }
+        bean.setHeadline(article.getTitle());
+        bean.setText(article.getLead());
+        bean.setLinkPath(article.getLinkPath());
+        if (article.getPublishingTime() > 0) {
+            bean.setStartDate(new Date(article.getPublishingTime()));
+        }
+        List<ContentId> images = article.getImages();
+        bean.setImageContentId((images != null && images.size() > 0) ? images.get(0) : null);
+        return new ContentResult<>(source, bean);
+    }
+
+}
++------------------------------------------------------------------+
+
+* TimelineNewsBean
+
+  The bean should provide at least a start date and an headline. If you provide an end date we will generate a range.
+  If you provide a tag, the item will be placed in a "tag" line, timelineJs support a max of six different tags, so the
+  first six will be shown the rest of tags will be ignored.

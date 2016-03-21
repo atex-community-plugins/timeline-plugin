@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template-definition version="1.0" xmlns="http://www.polopoly.com/polopoly/cm/app/xml">
+  <input-template name="com.atex.plugins.timeline.Configuration" label="com.atex.plugins.timeline.Configuration">
+    <policy>com.atex.plugins.timeline.TimelineConfigPolicy</policy>
+    <editor>com.polopoly.plugin.OPluginConfigContextPolicyWidget</editor>
+    <viewer>com.polopoly.plugin.OPluginConfigContextPolicyWidget</viewer>
+
+    <type>AppConfig</type>
+
+    <param name="EditState_saveAndInsert">false</param>
+    <param name="EditState_saveAndView">true</param>
+    <param name="EditState_saveAndClose">true</param>
+    <param name="ViewState_insert">false</param>
+
+    <field name="lang" input-template="p.TextInput" label="com.atex.plugins.timeline.lang">
+    </field>
+
+    <field name="width" input-template="p.TextInput" label="com.atex.plugins.timeline.width">
+    </field>
+
+    <field name="height" input-template="p.TextInput" label="com.atex.plugins.timeline.height">
+    </field>
+
+    <field name="font" input-template="p.TextInput" label="com.atex.plugins.timeline.font">
+    </field>
+
+    <field name="mediaSize" input-template="p.TextInput" label="com.atex.plugins.timeline.mediasize">
+    </field>
+
+    <field name="maxItems" input-template="p.TextInput" label="com.atex.plugins.timeline.maxitems">
+    </field>
+
+  </input-template>
+</template-definition>

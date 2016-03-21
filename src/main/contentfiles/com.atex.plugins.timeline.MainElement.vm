@@ -1,0 +1,28 @@
+#if ($estimateListSize > 0)
+#set($divId = "timeline-" + $m.local.controllerContext.renderId + "-" + $content.contentId.contentId.contentIdString.replaceAll('\.', '-'))
+<div id="${divId}"></div>
+<script type="text/javascript">
+$(document).ready(function() {
+  createStoryJS({
+      type:       'timeline',
+      source:     '${jsonUrl}',
+      embed_id:   '${divId}'
+      #if ($width)
+      , width: '${width}'
+      #end
+      #if ($height)
+      , height: '${height}'
+      #end
+      #if ($lang)
+      , lang: '${lang}'
+      #end
+      #if ($lang)
+      , lang: '${lang}'
+      #end
+      #if ($font)
+      , font: '${font}'
+      #end
+  });
+});
+</script>
+#end

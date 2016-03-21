@@ -1,0 +1,8 @@
+id:.
+major:appconfig
+inputtemplate:com.atex.plugins.timeline.Configuration
+securityparent:p.siteengine.Configuration.d
+component:polopoly.Content:name:Timeline Configuration
+component:mediaSize:value:400
+component:width:value:100%
+component:height:value:600

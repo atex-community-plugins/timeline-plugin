@@ -1,0 +1,30 @@
+Installation
+
+  The plugin is installed using the standard installation guidelines. When the installation is done, you should be
+  able to see the plugin in the plugins department in the admin gui.
+
+* Configuration
+
+** Language
+
+  Default localization is english, see https://github.com/NUKnightLab/TimelineJS#language for a list of available languages.
+
+** Width
+
+  Width of the timeline, it is a css property so something like "100%" is valid.
+
+** Height
+
+  Height of the timeline, it is a css property.
+
+** Font
+
+  You can change the font used in the timeline, see https://github.com/NUKnightLab/TimelineJS#font-options for examples and values to be used.
+
+** Media Size
+
+  This is the max size of any image used in the timeline.
+
+** Max Items
+
+  Max number of items to be shown in the timeline, this is mostly useful when using a search based publishing queue.

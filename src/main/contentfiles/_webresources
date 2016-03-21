@@ -1,0 +1,8 @@
+# This file lists web resources of this plugin that should be rendered on all
+# pages. See "Plugin contributed web resources" on http://support.polopoly.com for
+# documentation.
+#
+
+http://cdn.knightlab.com/libs/timeline/latest/css/timeline.css
+
+http://cdn.knightlab.com/libs/timeline/latest/js/storyjs-embed.js
